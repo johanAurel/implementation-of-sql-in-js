@@ -14,7 +14,7 @@ CREATE TABLE students (
   student_id SERIAL PRIMARY KEY,
   student_name VARCHAR(40),
   house_id INT,
-  FOREIGN KEY (house_id) REFERENCES houses(house_id)
+  FOREIGN KEY (house_id) REFERENCES houses(house_id) ON DELETE CASCADE
 );
 
 INSERT INTO houses
