@@ -1,8 +1,10 @@
 const { expect } = require("chai");
 const app = require("../app");
 const request = require("supertest");
+const connection = require("../db/client.js");
 
 describe("/api", () => {
+  after(() => connection.end());
   describe("/houses", () => {
     it("GET:200 sends an array of houses to the client", () => {
       return request(app)
@@ -118,8 +120,8 @@ describe("/api", () => {
     });
   });
   describe("/students", () => {
-    it("GET:200 sends an array of all students to the client", () => {
-      // Your turn...
-    });
+    // it("GET:200 sends an array of all students to the client", () => {
+    //    Your turn...
+    // });
   });
 });
