@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS harry_potter_test;
-CREATE DATABASE harry_potter_test;
+DROP DATABASE IF EXISTS harry_potter;
+CREATE DATABASE harry_potter;
 
-\c harry_potter_test;
+\c harry_potter;
 
 CREATE TABLE houses (
   house_id SERIAL PRIMARY KEY,
