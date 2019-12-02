@@ -58,7 +58,7 @@ describe("/api", () => {
           .expect(200)
           .then(response => {
             expect(response.body.house).to.be.an("object");
-            expect(response.body.house.name).to.equal("Anatfindor");
+            expect(response.body.house.house_name).to.equal("Anatfindor");
           });
       });
       it("GET:404 sends an appropriate and error message when given a valid but non-existent id", () => {
@@ -94,7 +94,7 @@ describe("/api", () => {
       describe("/students", () => {
         it("GET:200 sends an array of students belonging to a single house to the client", () => {
           return request(app)
-            .get("/api/students/1")
+            .get("/api/houses/1/students")
             .expect(200)
             .then(response => {
               expect(response.body.students).to.be.an("array");
@@ -110,7 +110,7 @@ describe("/api", () => {
         });
         it("GET:200 sends an empty array of students when there are no students in the house", () => {
           return request(app)
-            .get("/api/students/999")
+            .get("/api/houses/999/students")
             .expect(404)
             .then(response => {
               expect(response.body.msg).to.equal("house does not exist");
