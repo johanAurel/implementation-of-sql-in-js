@@ -21,7 +21,6 @@ exports.selectHouseById = house_id => {
   return client
     .query("SELECT * FROM houses WHERE house_id = $1;", [house_id])
     .then(result => {
-      console.log(result.rows);
       return result.rows[0];
     });
 };
