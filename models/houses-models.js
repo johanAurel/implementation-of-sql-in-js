@@ -31,7 +31,7 @@ exports.deleteHouseById = house_id => {
 
 exports.selectStudentsByHouseId = house_id => {
   return client
-    .query("SELECT * FROM students WHERE students.house_id = $1", [house_id])
+    .query("SELECT * FROM students WHERE students.house_id = $1;", [house_id])
     .then(result => {
       return result.rows;
     });
