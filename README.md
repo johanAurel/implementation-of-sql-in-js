@@ -34,7 +34,9 @@ module.exports = dbConfig;
 
 ## Aim
 
-If you head over to `/spec/index.spec.js` you'll see that we have provided half a test suite for you. Writing good tests for error handling can be a bit daunting at first so to begin with we've provided you with the tests. You'll have to write your own in the second half of the cold task.
+If you head over to `/spec/index.spec.js` you'll see that we have provided half a test suite for you. Writing good tests for error handling can be a bit daunting at first so to begin with we've provided you with the tests. 
+
+You'll have to write your own in the second half of the cold task when you get to the `/api/students` endpoint!
 
 If you run the tests `npm test` you'll see that we've also taken the liberty of getting your endpoints working. All that's left for you to do is pass the tests for errors.
 
