@@ -15,7 +15,6 @@ exports.insertHouse = ({ house_name, founder, animal }) => {
     .then(result => {
       return result.rows[0];
     })
-    .catch(console.log);
 };
 
 exports.selectHouseById = house_id => {
