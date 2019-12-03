@@ -121,7 +121,7 @@ describe('/api', () => {
             .get('/api/houses/999/students')
             .expect(404)
             .then((response) => {
-              expect(response.body.msg).to.equal('house does not exist');
+              expect(response.body.msg).to.equal('House does not exist');
             });
         });
       });
