@@ -79,7 +79,7 @@ describe('/api', () => {
       });
       it('DELETE:204 deletes the specified house and sends no body back', () => {
         return request(app)
-          .delete('/api/houses/1')
+          .delete('/api/houses/3')
           .expect(204);
         // No "then" because a 204 status responds with no body no matter what
       });
