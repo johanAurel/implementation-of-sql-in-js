@@ -22,7 +22,8 @@ INSERT INTO houses
 VALUES
   ('Anatfindor', 'Gemma Anatfindor', 'Lion'),
   ('Alexclaw', 'Clive Alexclaw', 'Eagle'),
-  ('Shaqlepuff', 'Tina Shaqlepuff', 'Badger');
+  ('Shaqlepuff', 'Tina Shaqlepuff', 'Badger'),
+  ('Tomtherin', 'Simon Tomtherin', 'Snake');
 
 INSERT INTO students
   (student_name, house_id)
