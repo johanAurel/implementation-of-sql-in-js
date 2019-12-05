@@ -34,10 +34,125 @@ module.exports = dbConfig;
 
 ## Aim
 
-If you head over to `/spec/index.spec.js` you'll see that we have provided half a test suite for you. Writing good tests for error handling can be a bit daunting at first so to begin with we've provided you with the tests. 
+### Part 1
 
-You'll have to write your own in the second half of the cold task when you get to the `/api/students` endpoint!
+If you head over to `/spec/index.spec.js` you'll see that we have provided half a test suite for you. Writing good tests for error handling can be a bit daunting at first so to begin with we've provided you with the tests. If you run the tests `npm test` you'll see that we've also taken the liberty of getting your endpoints working. All that's left for you to do is pass the tests for errors. Don't forget to make use of the `.catch` block as well as `next`!
 
-If you run the tests `npm test` you'll see that we've also taken the liberty of getting your endpoints working. All that's left for you to do is pass the tests for errors.
+### Part 2
 
-Don't forget to make use of the `.catch` block as well as `next`!
+You'll have to come up with your own tests in the second half of the cold task where you'll be completing the `/api/students` endpoints. Be sure to follow the happy path, first testing the endpoints correctly before moving on to potential errors.
+
+#### Endpoints
+
+##### `GET /api/students`
+
+**_Gets all students_**
+
+```json
+{
+  "students": [
+    { "student_id": 1, "student_name": "Cillian Potter", "house_id": 1 },
+    { "student_id": 2, "student_name": "Angelina Granger", "house_id": 1 }
+    { "student_id": 3, "student_name": "Tom Digory", "house_id": 3 }
+  ]
+}
+```
+
+##### `GET /api/students?sort_by=desc`
+
+**_Gets all the students ordered by student_id in descending order_**
+
+Response body:
+
+```json
+{
+  "students": [
+    { "student_id": 3, "student_name": "Tom Digory", "house_id": 3 }
+    { "student_id": 2, "student_name": "Angelina Granger", "house_id": 1 }
+    { "student_id": 1, "student_name": "Cillian Potter", "house_id": 1 },
+  ]
+}
+```
+
+##### `GET /api/students?order_by=<COLUMN>`
+
+**_Gets all the students ordered by the specified column_**
+
+Request URL:
+
+`"/api/students?order_by=student_name"`
+
+Response body:
+
+```json
+{
+  "students": [
+    { "student_id": 2, "student_name": "Angelina Granger", "house_id": 1 }
+    { "student_id": 1, "student_name": "Cillian Potter", "house_id": 1 },
+    { "student_id": 3, "student_name": "Tom Digory", "house_id": 3 }
+  ]
+}
+```
+
+##### `GET /api/students/:student_id`
+
+**_Gets a single student_**
+
+Response Body:
+
+```json
+{
+  "student": {
+    "student_id": 1,
+    "student_name": "Cillian Potter",
+    "house_id": 1
+  }
+}
+```
+
+##### `PATCH /api/students/:student_id`
+
+**_Updates a student's house_id and sends back the updated student_**
+
+Request body:
+
+```js
+{ house_id: /* new house ID */ }
+```
+
+Response Body:
+
+```json
+{
+  "student": {
+    "student_id": 1,
+    "student_name": "Cillian Potter",
+    "house_id": /* new house ID */
+  }
+}
+```
+
+##### `POST /api/students`
+
+**_Adds a new student to the database and sends back the new student_**
+
+Request body:
+
+```js
+{
+  student_name: 'Haz Tonks',
+  house_id: 2
+}
+```
+
+Response Body:
+
+```json
+{
+  "student": {
+    "student_id": /* NUMBER */,
+    "student_name": "Haz Tonks",
+    "house_id": 2
+  }
+}
+```
