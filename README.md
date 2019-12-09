@@ -40,7 +40,7 @@ If you head over to `/spec/index.spec.js` you'll see that we have provided half 
 
 ### Part 2
 
-You'll have to come up with your own tests in the second half of the cold task where you'll be completing the `/api/students` endpoints. Be sure to follow the happy path, first testing the endpoints correctly before moving on to potential errors.
+You'll have to come up with your own tests in the second half of the cold task where you'll be completing the `/api/students` endpoints. Be sure to follow the happy path, first testing that you can get the endpoints working correctly before moving on to potential errors.
 
 #### Endpoints
 
@@ -127,7 +127,7 @@ Response Body:
   "student": {
     "student_id": 1,
     "student_name": "Cillian Potter",
-    "house_id": /* new house ID */
+    "house_id": /* house ID from the request body */
   }
 }
 ```
@@ -150,7 +150,7 @@ Response Body:
 ```json
 {
   "student": {
-    "student_id": /* NUMBER */,
+    "student_id": /* PSQL Generated Student ID */,
     "student_name": "Haz Tonks",
     "house_id": 2
   }
