@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "npm run seed && mocha spec",
+    "test": "npm run seed && jest",
     "seed": "psql -f db/seed.sql"
   },
   "keywords": [],
