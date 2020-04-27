@@ -14,17 +14,16 @@ Install the dependencies you'll need (think about whether they're devDependencie
 express
 pg
 supertest
-mocha
-chai
+jest
 ```
 
 Add in your own `config.js` in the `/db` directory. It should look like this:
 
 ```js
 const dbConfig = {
-  host: "localhost",
-  database: "harry_potter",
-  port: 5432
+  host: 'localhost',
+  database: 'harry_potter',
+  port: 5432,
   // username:
   // password:
 };
@@ -36,7 +35,7 @@ module.exports = dbConfig;
 
 ### Part 1
 
-If you head over to `/spec/index.spec.js` you'll see that we have provided half a test suite for you. Writing good tests for error handling can be a bit daunting at first so to begin with we've provided you with the tests. If you run the tests `npm test` you'll see that we've also taken the liberty of getting your endpoints working. All that's left for you to do is pass the tests for errors. Don't forget to make use of the `.catch` block as well as `next`!
+If you head over to `/__tests__/index.test.js` you'll see that we have provided half a test suite for you. Writing good tests for error handling can be a bit daunting at first so to begin with we've provided you with the tests. If you run the tests `npm test` you'll see that we've also taken the liberty of getting your endpoints working. All that's left for you to do is pass the tests for errors. Don't forget to make use of the `.catch` block as well as `next`!
 
 ### Part 2
 
