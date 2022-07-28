@@ -4,12 +4,20 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "npm run seed && jest",
-    "seed": "psql -f db/seed.sql"
+    "test": "PGDATABASE=marvel jest",
+    "setup-dbs": "psql -f db/setup.sql",
+    "seed": "PGDATABASE=marvel node db/run-seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "express": "^4.18.1",
+    "pg": "^8.7.3",
+    "pg-format": "^1.0.4"
+  },
+  "devDependencies": {
+    "jest": "^28.1.3",
+    "supertest": "^6.2.4"
+  }
 }

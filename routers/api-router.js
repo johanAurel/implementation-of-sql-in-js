@@ -1,6 +1,6 @@
-const apiRouter = require("express").Router();
-const housesRouter = require("./houses-router");
+const apiRouter = require('express').Router();
+const teamsRouter = require('./teams-router');
 
-apiRouter.use("/houses", housesRouter);
+apiRouter.use('/teams', teamsRouter);
 
 module.exports = apiRouter;
