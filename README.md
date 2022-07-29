@@ -2,156 +2,192 @@
 
 ## _I don't think you can handle this_
 
-**No, actually I do.** There's not much to error handling beyond a bit of logic. Essentially, it all boils down to a handful of if statements and you're more than capable of following the logic by this stage. _If_ my query goes wrong _then_ send this response.
+**No, actually I do!** There's not much to error handling beyond a bit of logic. Essentially, it all boils down to a handful of if statements and you're more than capable of following the logic by this stage. _If_ my query goes wrong _then_ send this response.
 
 It takes a little more knowledge to write efficient and neat error handling. Express has given us access to a set of tools that help to streamline the process and in this cold task we want you to make full use of them. Don't forget to refer to the notes and use what you've learnt in the lecture.
 
 ## Set up
 
-Install the dependencies you'll need (think about whether they're devDependencies or not).
+Before you can run the tests on this repo, you'll first need to:
 
-```
-express
-pg
-supertest
-jest
-```
+- Install all dependencies listed in the `package.json`
+- Use the provided script to create the database
 
-Add in your own `config.js` in the `/db` directory. It should look like this:
-
-```js
-const dbConfig = {
-  host: 'localhost',
-  database: 'harry_potter',
-  port: 5432,
-  // username:
-  // password:
-};
-
-module.exports = dbConfig;
-```
-
-## Aim
-
-### Part 1
+## Part 1
 
 If you head over to `/__tests__/index.test.js` you'll see that we have provided half a test suite for you. Writing good tests for error handling can be a bit daunting at first so to begin with we've provided you with the tests. If you run the tests `npm test` you'll see that we've also taken the liberty of getting your endpoints working. All that's left for you to do is pass the tests for errors. Don't forget to make use of the `.catch` block as well as `next`!
 
-### Part 2
+## Part 2
 
-You'll have to come up with your own tests in the second half of the cold task where you'll be completing the `/api/students` endpoints. Be sure to follow the happy path, first testing that you can get the endpoints working correctly before moving on to potential errors.
+You'll have to come up with your own tests in the second half of the cold task where you'll be completing the `/api/superheroes` endpoints. Be sure to follow the happy path, first testing that you can get the endpoints working correctly before moving on to potential errors.
 
-#### Endpoints
+### Endpoints
 
-##### `GET /api/students`
+#### `GET /api/superheroes`
 
-**_Gets all students_**
+**_Gets all superheroes_**
+
+Example response body:
 
 ```json
 {
-  "students": [
-    { "student_id": 1, "student_name": "Cillian Potter", "house_id": 1 },
-    { "student_id": 2, "student_name": "Angelina Granger", "house_id": 1 }
-    { "student_id": 3, "student_name": "Tom Digory", "house_id": 3 }
+  "superheroes": [
+    {
+      "superhero_id": 1,
+      "alias": "Captain Marvel",
+      "real_name": "Carol Danvers",
+      "is_identity_secret": false,
+      "image_url": "https://bit.ly/3voWXqO",
+      "team_id": 3
+    },
+    {
+      "superhero_id": 2,
+      "alias": "Daredevil",
+      "real_name": "Matt Murdoch",
+      "is_identity_secret": true,
+      "image_url": "https://bit.ly/3JeaG9r",
+      "team_id": 2
+    }
+    // ...
   ]
 }
 ```
 
-##### `GET /api/students?sort_by=desc`
+#### `GET /api/superheroes?order=desc`
 
-**_Gets all the students ordered by student_id in descending order_**
+**_Gets all the superheroes by superhero_id in descending order_**
 
-Response body:
+Example response body:
 
 ```json
 {
-  "students": [
-    { "student_id": 3, "student_name": "Tom Digory", "house_id": 3 }
-    { "student_id": 2, "student_name": "Angelina Granger", "house_id": 1 }
-    { "student_id": 1, "student_name": "Cillian Potter", "house_id": 1 },
+  "superheroes": [
+    {
+      "superhero_id": 8,
+      "alias": "Beast",
+      "real_name": "Hank McCoy",
+      "is_identity_secret": false,
+      "image_url": "https://bit.ly/3bdvDok",
+      "team_id": 1
+    },
+    {
+      "superhero_id": 7,
+      "alias": "Power Man",
+      "real_name": "Luke Cage",
+      "is_identity_secret": false,
+      "image_url": "https://cnet.co/3S5vJz9",
+      "team_id": 2
+    }
+    // ...
   ]
 }
 ```
 
-##### `GET /api/students?order_by=<COLUMN>`
+#### `GET /api/superheroes?sort_by=<COLUMN>`
 
-**_Gets all the students ordered by the specified column_**
+**_Gets all the superheroes sorted by the specified column_**
 
-Request URL:
+Example request URL:
 
-`"/api/students?order_by=student_name"`
+`"/api/superheroes?sort_by=alias"`
 
-Response body:
+Example response body:
 
 ```json
 {
-  "students": [
-    { "student_id": 2, "student_name": "Angelina Granger", "house_id": 1 }
-    { "student_id": 1, "student_name": "Cillian Potter", "house_id": 1 },
-    { "student_id": 3, "student_name": "Tom Digory", "house_id": 3 }
+  "superheroes": [
+    {
+      "superhero_id": 2,
+      "alias": "Beast",
+      "real_name": "Hank McCoy",
+      "is_identity_secret": false,
+      "image_url": "https://bit.ly/3bdvDok",
+      "team_id": 1
+    },
+    {
+      "superhero_id": 1,
+      "alias": "Captain Marvel",
+      "real_name": "Carol Danvers",
+      "is_identity_secret": false,
+      "image_url": "https://bit.ly/3voWXqO",
+      "team_id": 3
+    }
+    // ...
   ]
 }
 ```
 
-##### `GET /api/students/:student_id`
+#### `GET /api/superheroes/:superhero_id`
 
-**_Gets a single student_**
+**_Gets a single superhero_**
 
-Response Body:
+Example response Body:
 
 ```json
 {
-  "student": {
-    "student_id": 1,
-    "student_name": "Cillian Potter",
-    "house_id": 1
+  "superhero": {
+    "superhero_id": 3,
+    "alias": "Squirrel Girl",
+    "real_name": "Doreen Allene Green",
+    "is_identity_secret": false,
+    "image_url": "https://bit.ly/3voomZX",
+    "team_id": 3
   }
 }
 ```
 
-##### `PATCH /api/students/:student_id`
+#### `PATCH /api/superheroes/:superhero_id`
 
-**_Updates a student's house_id and sends back the updated student_**
+**_Updates a superhero's team_id and sends back the updated superhero_**
 
-Request body:
+Example request body:
 
-```js
-{ house_id: /* new house ID */ }
+```json
+{ "team_id": /* new team ID */ }
 ```
 
-Response Body:
+Example response Body:
 
 ```json
 {
-  "student": {
-    "student_id": 1,
-    "student_name": "Cillian Potter",
-    "house_id": /* house ID from the request body */
+  "superhero": {
+    "superhero_id": 1,
+    "alias": "Power Man",
+    "real_name": "Luke Cage",
+    "is_identity_secret": false,
+    "image_url": "https://cnet.co/3S5vJz9",
+    "team_id": /* team ID from the request body */
   }
 }
 ```
 
-##### `POST /api/students`
+#### `POST /api/superheroes`
 
-**_Adds a new student to the database and sends back the new student_**
+**_Adds a new superhero to the database and sends back the new superhero_**
 
-Request body:
-
-```js
-{
-  student_name: 'Haz Tonks',
-  house_id: 2
-}
-```
-
-Response Body:
+Example request body:
 
 ```json
 {
-  "student": {
-    "student_id": /* PSQL Generated Student ID */,
-    "student_name": "Haz Tonks",
-    "house_id": 2
+  "alias": "Spider-Man",
+  "real_name": "Peter Parker",
+  "is_identity_secret": true,
+  "image_url": "https://bit.ly/3Q1hQ37",
+  "team_id": 3
+}
+```
+
+Example response Body:
+
+```json
+{
+  "superhero": {
+    "superhero_id": /* PSQL Generated superhero ID */,
+    "alias": "Spider-Man",
+    "real_name": "Peter Parker",
+    "is_identity_secret": true,
+    "image_url": "https://bit.ly/3Q1hQ37",
+    "team_id": 3
   }
 }
 ```
