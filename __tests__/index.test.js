@@ -119,6 +119,14 @@ describe('/api/teams/:team_id/superheroes', () => {
         expect(response.body.msg).toBe('team does not exist');
       });
   });
+    test('GET: 400 responds with an appropriate error message when given an invalid id', () => {
+    return request(app)
+    .get('/api/teams/not-an-id/superheroes')
+    .expect(400)
+    .then((response) => {
+      expect(response.body.msg).toBe('Invalid id')
+    });
+  });
 });
 
 describe('/api/superheroes', () => {
