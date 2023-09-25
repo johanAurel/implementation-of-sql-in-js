@@ -33,7 +33,7 @@ describe('/api/teams', () => {
         expect(response.body.team).toMatchObject({ team_id: 5, ...newTeam });
       });
   });
-  test('POST:400 responds with an appropriate error message when provided with a bad team (no name)', () => {
+  test('POST:400 responds with an appropriate status and error message when provided with a bad team (no team name)', () => {
     return request(app)
       .post('/api/teams')
       .send({
@@ -59,7 +59,7 @@ describe('/api/teams/:team_id', () => {
         });
       });
   });
-  test('GET:404 sends an appropriate and error message when given a valid but non-existent id', () => {
+  test('GET:404 sends an appropriate status and error message when given a valid but non-existent id', () => {
     return request(app)
       .get('/api/teams/999')
       .expect(404)
@@ -67,7 +67,7 @@ describe('/api/teams/:team_id', () => {
         expect(response.body.msg).toBe('team does not exist');
       });
   });
-  test('GET:400 sends an appropriate and error message when given an invalid id', () => {
+  test('GET:400 sends an appropriate status and error message when given an invalid id', () => {
     return request(app)
       .get('/api/teams/not-a-team')
       .expect(400)
@@ -79,7 +79,7 @@ describe('/api/teams/:team_id', () => {
     return request(app).delete('/api/teams/3').expect(204);
     // No "then" because a 204 status responds with no body no matter what
   });
-  test('DELETE:404 responds with an appropriate error message when given a non-existent id', () => {
+  test('DELETE:404 responds with an appropriate status and error message when given a non-existent id', () => {
     return request(app)
       .delete('/api/teams/999')
       .expect(404)
@@ -111,7 +111,7 @@ describe('/api/teams/:team_id/superheroes', () => {
         });
       });
   });
-  test('GET:404 sends an appropriate and error message when given a valid but non-existent id', () => {
+  test('GET:404 sends an appropriate status and error message when given a valid but non-existent id', () => {
     return request(app)
       .get('/api/teams/999/superheroes')
       .expect(404)
