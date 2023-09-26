@@ -12,7 +12,7 @@ const seed = ({ superheroesData, teamsData }) => {
       return db.query(`
         CREATE TABLE teams (
           team_id SERIAL PRIMARY KEY,
-          team_name VARCHAR(50),
+          team_name VARCHAR(50) NOT NULL,
           formation_year INT
         );
       `);
