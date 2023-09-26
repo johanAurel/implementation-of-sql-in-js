@@ -72,7 +72,7 @@ describe('/api/teams/:team_id', () => {
       .get('/api/teams/not-a-team')
       .expect(400)
       .then((response) => {
-        expect(response.body.msg).toBe('Invalid id');
+        expect(response.body.msg).toBe('Bad request');
       });
   });
   test('DELETE:204 deletes the specified team and sends no body back', () => {
@@ -85,6 +85,14 @@ describe('/api/teams/:team_id', () => {
       .expect(404)
       .then((response) => {
         expect(response.body.msg).toBe('team does not exist');
+      });
+  });
+  test('DELETE:400 responds with an appropriate status and error message when given an invalid id', () => {
+    return request(app)
+      .delete('/api/teams/not-a-team')
+      .expect(400)
+      .then((response) => {
+        expect(response.body.msg).toBe('Bad request');
       });
   });
 });
@@ -119,13 +127,13 @@ describe('/api/teams/:team_id/superheroes', () => {
         expect(response.body.msg).toBe('team does not exist');
       });
   });
-    test('GET: 400 responds with an appropriate error message when given an invalid id', () => {
+  test('GET:400 responds with an appropriate error message when given an invalid id', () => {
     return request(app)
-    .get('/api/teams/not-an-id/superheroes')
-    .expect(400)
-    .then((response) => {
-      expect(response.body.msg).toBe('Invalid id')
-    });
+      .get('/api/teams/not-an-id/superheroes')
+      .expect(400)
+      .then((response) => {
+        expect(response.body.msg).toBe('Bad request');
+      });
   });
 });
 
