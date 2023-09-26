@@ -14,10 +14,12 @@ describe('/api/teams', () => {
       .get('/api/teams')
       .expect(200)
       .then((response) => {
-        expect(response.body.teams).toEqual(expect.any(Array));
-        expect(Object.keys(response.body.teams[0])).toEqual(
-          expect.arrayContaining(['team_id', 'team_name', 'formation_year'])
-        );
+        expect(response.body.teams.length).toBe(4);
+        response.body.teams.forEach((team) => {
+          expect(typeof team.team_id).toBe('number');
+          expect(typeof team.team_name).toBe('string');
+          expect(typeof team.formation_year).toBe('number');
+        });
       });
   });
   test('POST:201 inserts a new team to the db and sends the new team back to the client', () => {
@@ -30,7 +32,9 @@ describe('/api/teams', () => {
       .send(newTeam)
       .expect(201)
       .then((response) => {
-        expect(response.body.team).toMatchObject({ team_id: 5, ...newTeam });
+        expect(response.body.team.team_id).toBe(5);
+        expect(response.body.team.team_name).toBe('Inhumans');
+        expect(response.body.team.formation_year).toBe(1965);
       });
   });
   test('POST:400 responds with an appropriate status and error message when provided with a bad team (no team name)', () => {
@@ -52,11 +56,9 @@ describe('/api/teams/:team_id', () => {
       .get('/api/teams/1')
       .expect(200)
       .then((response) => {
-        expect(response.body.team).toMatchObject({
-          team_id: 1,
-          team_name: 'X-Men',
-          formation_year: 1963
-        });
+        expect(response.body.team.team_id).toBe(1);
+        expect(response.body.team.team_name).toBe('X-Men');
+        expect(response.body.team.formation_year).toBe(1963);
       });
   });
   test('GET:404 sends an appropriate status and error message when given a valid but non-existent id', () => {
@@ -103,18 +105,13 @@ describe('/api/teams/:team_id/superheroes', () => {
       .get('/api/teams/1/superheroes')
       .expect(200)
       .then((response) => {
-        expect(response.body.superheroes).toEqual(expect.any(Array));
-        expect(Object.keys(response.body.superheroes[0])).toEqual(
-          expect.arrayContaining([
-            'superhero_id',
-            'alias',
-            'real_name',
-            'is_identity_secret',
-            'image_url',
-            'team_id'
-          ])
-        );
+        expect(response.body.superheroes.length).toBe(3);
         response.body.superheroes.forEach((superhero) => {
+          expect(typeof superhero.superhero_id).toBe('number');
+          expect(typeof superhero.alias).toBe('string');
+          expect(typeof superhero.real_name).toBe('string');
+          expect(typeof superhero.is_identity_secret).toBe('boolean');
+          expect(typeof superhero.image_url).toBe('string');
           expect(superhero.team_id).toBe(1);
         });
       });
