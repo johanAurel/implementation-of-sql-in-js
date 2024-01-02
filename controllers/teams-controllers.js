@@ -3,7 +3,7 @@ const {
   insertTeam,
   selectTeamById,
   removeTeamById,
-  selectSuperheroesByTeamId
+  selectSuperheroesByTeamId,
 } = require('../models/teams-models.js');
 
 exports.getTeams = (req, res, next) => {
@@ -17,6 +17,7 @@ exports.postTeam = (req, res, next) => {
   insertTeam(newTeam).then((team) => {
     res.status(201).send({ team });
   });
+  // You might need some error handling here
 };
 
 exports.getTeamById = (req, res, next) => {
