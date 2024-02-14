@@ -45,7 +45,9 @@ describe('/api/teams', () => {
       })
       .expect(400)
       .then((response) => {
+        console.log(response.body, '<---response')
         expect(response.body.msg).toBe('Bad request');
+
       });
   });
 });
@@ -78,7 +80,9 @@ describe('/api/teams/:team_id', () => {
       });
   });
   test('DELETE:204 deletes the specified team and sends no body back', () => {
-    return request(app).delete('/api/teams/3').expect(204);
+    return request(app)
+    .delete('/api/teams/3')
+    .expect(204);
     // No "then" because a 204 status responds with no body no matter what
   });
   test('DELETE:404 responds with an appropriate status and error message when given a non-existent id', () => {
@@ -99,7 +103,7 @@ describe('/api/teams/:team_id', () => {
   });
 });
 
-describe('/api/teams/:team_id/superheroes', () => {
+describe.only('/api/teams/:team_id/superheroes', () => {
   test('GET:200 sends an array of superheroes belonging to a single team to the client', () => {
     return request(app)
       .get('/api/teams/1/superheroes')
@@ -135,7 +139,7 @@ describe('/api/teams/:team_id/superheroes', () => {
 });
 
 describe('/api/superheroes', () => {
-  // test("GET:200 sends an array of all superheroes to the client", () => {
+  test("GET:200 sends an array of all superheroes to the client", () => {
   //    Your turn...
-  // });
+   });
 });

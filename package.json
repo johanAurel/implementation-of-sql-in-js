@@ -4,20 +4,22 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "PGDATABASE=marvel jest",
+    "test": "PGDATABASE=marvel PGPASSWORD=johan jest",
     "setup-dbs": "psql -f db/setup.sql",
-    "seed": "PGDATABASE=marvel node db/run-seed.js"
+    "seed": "PGDATABASE=marvel PGPASSWORD=johan node db/run-seed.js"
+    
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1",
-    "pg": "^8.7.3",
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
     "pg-format": "^1.0.4"
   },
   "devDependencies": {
     "jest": "^28.1.3",
-    "supertest": "^6.2.4"
+    "nodemon": "^3.0.3",
+    "supertest": "^6.3.4"
   }
 }
